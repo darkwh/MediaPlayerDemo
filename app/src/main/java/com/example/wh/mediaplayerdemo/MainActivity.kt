@@ -5,6 +5,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.SurfaceHolder
+import android.widget.VideoView
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -12,6 +13,8 @@ class MainActivity : AppCompatActivity() {
 
     var holder: SurfaceHolder? = null
     var mediaPlayer: MediaPlayer? = null
+
+    var a : VideoView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
