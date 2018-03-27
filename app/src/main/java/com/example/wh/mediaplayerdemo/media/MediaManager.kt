@@ -39,7 +39,8 @@ object MediaManager : IMediaControl, IMediaPlayer.OnTimedTextListener, IMediaPla
 
         try {
             //TODO 设置数据源
-            ijkPlayer?.setDataSource("https://bj.bcebos.com/course-mct/media/riwenhanzi.mp4?authorization=bce-auth-v1%2Fde89d2e06dd7443a9e4422d5b3fb4eea%2F2018-03-09T09%3A07%3A24Z%2F6000%2F%2Fb41dc72621cc1458eff1a98ddc252aff8df5fe85128d22906c278e81833c2e61")
+//            ijkPlayer?.setDataSource("https://bj.bcebos.com/course-mct/media/riwenhanzi.mp4?authorization=bce-auth-v1%2Fde89d2e06dd7443a9e4422d5b3fb4eea%2F2018-03-09T09%3A07%3A24Z%2F6000%2F%2Fb41dc72621cc1458eff1a98ddc252aff8df5fe85128d22906c278e81833c2e61")
+            ijkPlayer?.dataSource = path
             ijkPlayer?.setAudioStreamType(AudioManager.STREAM_MUSIC)
             ijkPlayer?.setScreenOnWhilePlaying(true)
             ijkPlayer?.prepareAsync()

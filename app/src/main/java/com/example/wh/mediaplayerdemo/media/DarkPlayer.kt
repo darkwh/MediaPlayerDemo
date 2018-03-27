@@ -7,4 +7,5 @@ package com.example.wh.mediaplayerdemo.media
  */
 class DarkPlayer{
 
+
 }
