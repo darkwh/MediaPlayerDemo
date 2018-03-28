@@ -89,6 +89,7 @@ public class ExplosionField extends View {
             }
         });
         animator.start();
+        postInvalidate();
     }
 
     /**

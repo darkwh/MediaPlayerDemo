@@ -8,7 +8,6 @@ import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.support.annotation.IdRes;
-import android.util.Log;
 
 import java.util.Random;
 
@@ -49,7 +48,7 @@ public class ExplodeParticle extends Particle {
     /**
      * Bitmap缩放比例
      */
-    private float scale = 0.5f;
+    private float scale = 1f;
     /**
      * 图片旋转角度
      */
@@ -65,10 +64,10 @@ public class ExplodeParticle extends Particle {
         cx = 600;
         cy = 600;
         sourceBitmap = BitmapFactory.decodeResource(context.getResources(), resId);
+        //半径，变化范围2500，固定范围4000 合计4000-6500
         radius = new Random().nextInt(2500) + 4000;
         //TODO 此处待优化,使爆炸元素分布更均匀
         angle = new Random().nextInt(360);
-        Log.d("wh", "radius is " + radius);
         velocityX = Double.valueOf((radius / DEFAULT_DURATION) * Math.cos(angle)).floatValue();
         velocityY = Double.valueOf(radius / DEFAULT_DURATION * Math.sin(angle)).floatValue();
     }
@@ -85,18 +84,22 @@ public class ExplodeParticle extends Particle {
     protected void caculate(float factor) {
         cx += velocityX * radius / DEFAULT_DURATION * factor;
         cy += velocityY * radius / DEFAULT_DURATION * factor;
-        if (factor < 0.1) {
-            scale = (float) (0.2f + (factor / 0.1) * 1.1);
-        } else {
-            scale = (float) (1.3f * (1.1 - factor));
-        }
-        rotate = 360 * factor;
+
+        //TODO 此处计算有问题会造成画面抖动
+//        if (factor < 0.2) {
+//            scale = (float) (0.1f + (factor / 0.2) * 1.1);
+//        } else {
+//            scale = (float) (1.2f * (1.2 - factor));
+//        }
+        scale = 2.0f * (1 - factor);
+
+        rotate = 180 * factor;
         // 定义矩阵对象
         Matrix matrix = new Matrix();
-        // 缩放原图
-        matrix.postScale(scale, scale, cx, cy);
         // 向左旋转45度，参数为正则向右旋转
-        matrix.postRotate(rotate, cx, cy);
+        matrix.postRotate(rotate, 0, 0);
+        // 缩放原图
+        matrix.postScale(scale, scale);
         drawBitmap = Bitmap.createBitmap(sourceBitmap, 0, 0, sourceBitmap.getWidth(),
                 sourceBitmap.getHeight(), matrix, true);
     }

@@ -13,7 +13,7 @@ import android.view.animation.DecelerateInterpolator;
  * Created by Administrator on 2015/11/28 0028.
  */
 public class ExplosionAnimator extends ValueAnimator {
-    public static final int DEFAULT_DURATION = 2500;
+    public static final int DEFAULT_DURATION = 2000;
     private Particle[] mParticles;
     private Paint mPaint;
     private View mContainer;
@@ -26,6 +26,7 @@ public class ExplosionAnimator extends ValueAnimator {
         setFloatValues(0.0f, 1.0f);
         setInterpolator(new DecelerateInterpolator());
 //        setInterpolator(new LinearInterpolator());
+//        setInterpolator(new AccelerateDecelerateInterpolator());
         setDuration(DEFAULT_DURATION);
         mParticles = mParticleFactory.generateParticles(view.getContext(), bitmap, bound);
     }
