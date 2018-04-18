@@ -10,8 +10,7 @@ import com.example.wh.mediaplayerdemo.R;
  * Created by Administrator on 2015/11/29 0029.
  */
 public class ExplodeParticleFactory extends ParticleFactory {
-    public static final int PART_WH = 15; //默认图片宽高
-    private int imageCount = 15;
+    private int imageCount = 1;
 
     public Particle[] generateParticles(Context context, Bitmap bitmap, Rect bound) {
 

@@ -3,8 +3,8 @@ package com.example.wh.mediaplayerdemo.explosion;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.support.annotation.IdRes;
@@ -54,6 +54,8 @@ public class ExplodeParticle extends Particle {
      */
     private float rotate = 0;
 
+    private int tempWidth = 0;
+
     /**
      * @param resId //资源文件ID
      * @param x     //x坐标
@@ -63,7 +65,10 @@ public class ExplodeParticle extends Particle {
         super(context, resId, x, y);
         cx = 600;
         cy = 600;
-        sourceBitmap = BitmapFactory.decodeResource(context.getResources(), resId);
+//        sourceBitmap = BitmapFactory.decodeResource(context.getResources(), resId);
+        sourceBitmap = Bitmap.createBitmap(30, 30,
+                Bitmap.Config.ARGB_8888);
+        sourceBitmap.eraseColor(Color.parseColor("#FF0000"));//填充颜色
         //半径，变化范围2500，固定范围4000 合计4000-6500
         radius = new Random().nextInt(2500) + 4000;
         //TODO 此处待优化,使爆炸元素分布更均匀
@@ -93,13 +98,13 @@ public class ExplodeParticle extends Particle {
 //        }
         scale = 2.0f * (1 - factor);
 
-        rotate = 180 * factor;
+        rotate = 720 * factor;
         // 定义矩阵对象
         Matrix matrix = new Matrix();
         // 向左旋转45度，参数为正则向右旋转
-        matrix.postRotate(rotate, 0, 0);
-        // 缩放原图
         matrix.postScale(scale, scale);
+        matrix.postRotate(rotate, sourceBitmap.getWidth() / 2, sourceBitmap.getHeight() / 2);
+        // 缩放原图
         drawBitmap = Bitmap.createBitmap(sourceBitmap, 0, 0, sourceBitmap.getWidth(),
                 sourceBitmap.getHeight(), matrix, true);
     }

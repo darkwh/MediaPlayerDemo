@@ -6,7 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.view.View;
-import android.view.animation.DecelerateInterpolator;
+import android.view.animation.LinearInterpolator;
 
 
 /**
@@ -24,8 +24,8 @@ public class ExplosionAnimator extends ValueAnimator {
         mPaint = new Paint();
         mContainer = view;
         setFloatValues(0.0f, 1.0f);
-        setInterpolator(new DecelerateInterpolator());
-//        setInterpolator(new LinearInterpolator());
+//        setInterpolator(new DecelerateInterpolator());
+        setInterpolator(new LinearInterpolator());
 //        setInterpolator(new AccelerateDecelerateInterpolator());
         setDuration(DEFAULT_DURATION);
         mParticles = mParticleFactory.generateParticles(view.getContext(), bitmap, bound);

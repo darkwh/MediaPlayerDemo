@@ -2,9 +2,10 @@ package com.example.wh.mediaplayerdemo
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import com.example.wh.mediaplayerdemo.explosion.ExplodeParticleFactory
-import com.example.wh.mediaplayerdemo.explosion.ExplosionField
+import com.plattysoft.leonids.ParticleSystem
 import kotlinx.android.synthetic.main.activity_main.*
+
+
 
 
 class MainActivity : AppCompatActivity() {
@@ -18,8 +19,17 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val explosionField = ExplosionField(this, ExplodeParticleFactory())
-        explosionField.addListener(btn)
+        btn.setOnClickListener {
+            ParticleSystem(this, 80, R.drawable.ic_explode1, 5000)
+                    .setSpeedModuleAndAngleRange(0f, 0.1f, 225, 315)
+                    .setRotationSpeed(180f)
+                    .setAcceleration(0.00005f, 270)
+                    .setScaleRange(0.1f, 0.5f)
+                    .setFadeOut(4000)
+                    .emit(btn, 2)
+        }
+//        val explosionField = ExplosionField(this, ExplodeParticleFactory())
+//        explosionField.addListener(btn)
 //        mediaPlayer = MediaPlayer()
 //
 //        try {
